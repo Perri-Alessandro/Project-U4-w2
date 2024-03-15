@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class GestioneCatalogo {
     private static List<Catalogo> archivio = new ArrayList<>();
@@ -43,6 +44,7 @@ public class GestioneCatalogo {
             System.out.println("3 PER AGGIUNGER 1 ELEMENTO AL CATALOGO");
             System.out.println("4 PER CERCARE 1 ELEMENTO TRAMITE IL SUO CODICE ISBN");
             System.out.println("5 PER CERCARE 1 ELEMENTO TRAMITE LA SUA DATA DI PUBBLICAZIONE");
+            System.out.println("6 PER CERCARE 1 LIBRO TRAMITE IL SUO AUTORE");
             System.out.println("0 PER CHIUDERE IL PROGRAMMA");
 
 
@@ -125,6 +127,11 @@ public class GestioneCatalogo {
 
                 case 5:
                     cercaConAnno(sc, catalogo);
+                    break;
+
+                case 6:
+                    cercaConAutore(sc, catalogo);
+                    break;
 
                 default:
                     System.out.println("SCELTA NON VALIDA");
@@ -184,6 +191,20 @@ public class GestioneCatalogo {
             System.out.println("ELEMENTO TROVATO: " + elementoTrovato);
         } else {
             System.err.println("NESSUN ELEMENTO TROVATO CON LA DATA SPECIFICATO");
+        }
+    }
+
+    private static void cercaConAutore(Scanner sc, List<Catalogo> catalogo) {
+        System.out.println("INSERISCI AUTORE DI ELEMENTO DA CERCARE: ");
+        String autore = sc.nextLine();
+
+        List<Libro> elementoTrovato = catalogo.stream().filter(elem -> elem instanceof Libro)
+                .map(elem -> (Libro) elem).filter(libro -> libro.autore.equalsIgnoreCase(autore)).collect(Collectors.toList());
+
+        if (elementoTrovato != null) {
+            System.out.println("ELEMENTO TROVATO: " + elementoTrovato);
+        } else {
+            System.out.println("NESSUN ELEMENTO TROVATO PER QUESTO AUTORE");
         }
     }
 }
