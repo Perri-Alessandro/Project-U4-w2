@@ -119,6 +119,17 @@ public class GestioneCatalogo {
 
 
     private static void rimuoviElemento(Scanner sc, List<Catalogo> catalogo) {
+        System.out.println("INSERISCI IL CODCIE ISBN DELL'ELEMENTO DA RIMUOVERE (da 10000 in ordine crescente) : ");
+        int x = sc.nextInt();
+        Catalogo elementoDatogliere = catalogo.stream().filter(prod -> prod.codiceIsbn == x)
+                .findFirst().orElse(null);
+
+        if (elementoDatogliere != null) {
+            catalogo.remove(elementoDatogliere);
+            System.out.println(" ELEMENTO CON CODICE ISBN " + x + " RIMOSSO CON SUCCESSO.");
+        } else {
+            System.out.println("CODICE ISBN " + x + " NON VALIDO, RIPROVARE: ");
+        }
 
     }
 }
