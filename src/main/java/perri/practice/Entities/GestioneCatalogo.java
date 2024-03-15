@@ -204,7 +204,11 @@ public class GestioneCatalogo {
         if (elementoTrovato != null) {
             System.out.println("ELEMENTO TROVATO: " + elementoTrovato);
         } else {
-            System.out.println("NESSUN ELEMENTO TROVATO PER QUESTO AUTORE");
+            System.err.println("NESSUN ELEMENTO TROVATO PER QUESTO AUTORE");
         }
+    }
+
+    public static List<Catalogo> getArchivio() {
+        return archivio;
     }
 }
