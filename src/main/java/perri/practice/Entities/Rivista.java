@@ -22,7 +22,7 @@ public class Rivista extends Catalogo {
     public String toString() {
         return "Rivista{" +
                 "titolo='" + titolo + '\'' +
-                "codiceIsbn=" + codiceIsbn +
+                ", codiceIsbn=" + codiceIsbn +
                 ", annoDiPubblicazione=" + annoDiPubblicazione +
                 ", numeroPagine=" + numeroPagine +
                 ", Periodicità=" + periodicità +

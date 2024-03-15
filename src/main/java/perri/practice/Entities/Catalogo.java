@@ -21,7 +21,7 @@ public abstract class Catalogo {
     @Override
     public String toString() {
         return "Catalogo{" +
-                "codiceIsbn=" + codiceIsbn +
+                ", codiceIsbn=" + codiceIsbn +
                 ", titolo='" + titolo + '\'' +
                 ", annoDiPubblicazione=" + annoDiPubblicazione +
                 ", numeroPagine=" + numeroPagine +

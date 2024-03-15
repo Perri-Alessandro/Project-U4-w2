@@ -3,6 +3,7 @@ package perri.practice.Entities;
 import com.github.javafaker.Faker;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -59,8 +60,17 @@ public class GestioneCatalogo {
                         System.out.println("AGGIUNGI LIBRO - INSERISCI TITOLO, DATA DI PUBBLICAZIONE (yyyy-mm-dd), NUMERO PAGINE, AUTORE E GENERE: ");
 
                         String titolo = sc.nextLine();
-                        String dataStringa = sc.nextLine();
-                        LocalDate dataPubblicazione = LocalDate.parse(dataStringa);
+                        String dataStringa = null;
+                        LocalDate dataPubblicazione = null;
+                        while (dataPubblicazione == null) {
+                            try {
+                                dataStringa = sc.nextLine();
+                                dataPubblicazione = LocalDate.parse(dataStringa);
+                            } catch (DateTimeParseException e) {
+                                System.out.println("FORMATO NON VALIDO, PER FAVORE INSERISCI LA DATA NEL FORMATO CORRETTO (yyyy-mm-dd).");
+                            }
+                        }
+                        dataPubblicazione = LocalDate.parse(dataStringa);
                         int pagine = sc.nextInt();
                         sc.nextLine();
                         String autore = sc.nextLine();
@@ -72,8 +82,17 @@ public class GestioneCatalogo {
                         System.out.println("AGGIUNGI RIVISTA - INSERISCI TITOLO, DATA DI PUBBLICAZIONE (yyyy-mm-dd), NUMERO PAGINE E PERIODICITà (0 settimanale, 1 mensile, 2 semestrale): ");
 
                         String titolo = sc.nextLine();
-                        String dataStringa = sc.nextLine();
-                        LocalDate dataPubblicazione = LocalDate.parse(dataStringa);
+                        String dataStringa = null;
+                        LocalDate dataPubblicazione = null;
+                        while (dataPubblicazione == null) {
+                            try {
+                                dataStringa = sc.nextLine();
+                                dataPubblicazione = LocalDate.parse(dataStringa);
+                            } catch (DateTimeParseException e) {
+                                System.out.println("FORMATO NON VALIDO, PER FAVORE INSERISCI LA DATA NEL FORMATO CORRETTO (yyyy-mm-dd).");
+                            }
+                        }
+                        dataPubblicazione = LocalDate.parse(dataStringa);
                         int pagine = sc.nextInt();
                         int periodicita = sc.nextInt();
                         Rivista nuovaRivista = new Rivista(titolo, dataPubblicazione, pagine, Periodicità.values()[periodicita]);

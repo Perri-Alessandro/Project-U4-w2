@@ -19,6 +19,7 @@ public class Application {
         System.out.println("------------------------ ARCHIVIO LIBRERIA --------------------------");
         List<Catalogo> catalogo = GestioneCatalogo.gestisciCatalogo(sc);
 
+
         sc.close();
     }
 }

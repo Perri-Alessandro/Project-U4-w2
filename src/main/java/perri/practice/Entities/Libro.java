@@ -37,7 +37,7 @@ public class Libro extends Catalogo {
     public String toString() {
         return "Libro{" +
                 "titolo='" + titolo + '\'' +
-                "codiceIsbn=" + codiceIsbn +
+                ", codiceIsbn=" + codiceIsbn +
                 ", annoDiPubblicazione=" + annoDiPubblicazione +
                 ", numeroPagine=" + numeroPagine +
                 ", autore='" + autore + '\'' +
