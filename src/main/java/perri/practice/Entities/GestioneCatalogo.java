@@ -18,7 +18,7 @@ public class GestioneCatalogo {
     public static List<Catalogo> creaArchivioIniziale() {
 
         for (int i = 1; i <= 5; i++) {
-            String titolo = faker.backToTheFuture().quote();
+            String titolo = faker.yoda().quote();
             String autore = faker.pokemon().name();
             archivio.add(new Libro(titolo, LocalDate.of(2018 + i, 4 + i, 20 + i), 100 + i * 10, autore, "Genere " + i));
         }
@@ -37,9 +37,10 @@ public class GestioneCatalogo {
 
         do {
             System.out.println("SCEGLI UN OPZIONE: ");
-            System.out.println("1 PER AGGIUNGER 1 ELEMENTO AL CATALOGO");
+            System.out.println("1 PER VISUALIZZARE IL CATALOGO");
             System.out.println("2 PER RIMUOVERE 1 ELEMENTO DAL CATALOGO");
-            System.out.println("3 VISUALIZZARE IL CATALOGO");
+            System.out.println("3 PER AGGIUNGER 1 ELEMENTO AL CATALOGO");
+            System.out.println("4 PER CERCARE 1 ELEMENTO TRAMITE IL SUO CODICE ISBN");
             System.out.println("0 PER CHIUDERE IL PROGRAMMA");
 
 
@@ -51,6 +52,14 @@ public class GestioneCatalogo {
                     System.out.println("GRAZIE ED ARRIVEDERCI!");
                     break;
                 case 1:
+                    visualizzaCatalogo(catalogo);
+                    break;
+
+                case 2:
+                    rimuoviElemento(sc, catalogo);
+                    break;
+
+                case 3:
                     System.out.println("1 PER AGGIUNGER 1 LIBRO");
                     System.out.println("2 PER AGGIUNGERE UNA RIVISTA");
                     int tipo = sc.nextInt();
@@ -108,15 +117,8 @@ public class GestioneCatalogo {
                         Rivista nuovaRivista = new Rivista(titolo, dataPubblicazione, pagine, periodicitàScelta);
                         catalogo.add(nuovaRivista);
                     }
-
-                    break;
-
-                case 2:
-                    rimuoviElemento(sc, catalogo);
-                    break;
-
-                case 3:
-                    visualizzaCatalogo(catalogo);
+                case 4:
+                    cercaConIsbn(sc, catalogo);
                     break;
 
                 default:
@@ -144,5 +146,18 @@ public class GestioneCatalogo {
             System.out.println("CODICE ISBN " + x + " NON VALIDO, RIPROVARE: ");
         }
 
+    }
+
+    private static void cercaConIsbn(Scanner sc, List<Catalogo> catalogo) {
+        System.out.println("INSERISCI IL CODCIE ISBN DELL'ELEMENTO DA CERCARE: ");
+        int codice = sc.nextInt();
+
+        Catalogo elementoTrovato = catalogo.stream().filter(elemento -> elemento.codiceIsbn == codice).findAny().orElse(null);
+
+        if (elementoTrovato != null) {
+            System.out.println("ELEMENTO TROVATO: " + elementoTrovato);
+        } else {
+            System.out.println("NESSUN ELEMENTO TROVATO CON L'ISBN SPECIFICATO");
+        }
     }
 }

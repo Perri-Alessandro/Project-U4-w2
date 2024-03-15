@@ -3,10 +3,8 @@ package perri.practice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import perri.practice.Entities.Catalogo;
 import perri.practice.Entities.GestioneCatalogo;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -15,10 +13,9 @@ public class Application {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("------------------------------------- ARCHIVIO BIBLIOTECA1 -----------------------------------");
 
-        System.out.println("------------------------ ARCHIVIO LIBRERIA --------------------------");
-        List<Catalogo> catalogo = GestioneCatalogo.gestisciCatalogo(sc);
-
+        GestioneCatalogo.gestisciCatalogo(sc);
 
         sc.close();
     }
