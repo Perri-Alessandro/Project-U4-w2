@@ -3,6 +3,7 @@ package perri.practice.Entities;
 import com.github.javafaker.Faker;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class GestioneCatalogo {
             System.out.println("2 PER RIMUOVERE 1 ELEMENTO DAL CATALOGO");
             System.out.println("3 PER AGGIUNGER 1 ELEMENTO AL CATALOGO");
             System.out.println("4 PER CERCARE 1 ELEMENTO TRAMITE IL SUO CODICE ISBN");
+            System.out.println("5 PER CERCARE 1 ELEMENTO TRAMITE LA SUA DATA DI PUBBLICAZIONE");
             System.out.println("0 PER CHIUDERE IL PROGRAMMA");
 
 
@@ -76,7 +78,7 @@ public class GestioneCatalogo {
                                 dataStringa = sc.nextLine();
                                 dataPubblicazione = LocalDate.parse(dataStringa);
                             } catch (DateTimeParseException e) {
-                                System.out.println("FORMATO NON VALIDO, PER FAVORE INSERISCI LA DATA NEL FORMATO CORRETTO (yyyy-mm-dd).");
+                                System.err.println("FORMATO NON VALIDO, PER FAVORE INSERISCI LA DATA NEL FORMATO CORRETTO (yyyy-mm-dd).");
                             }
                         }
                         dataPubblicazione = LocalDate.parse(dataStringa);
@@ -98,7 +100,7 @@ public class GestioneCatalogo {
                                 dataStringa = sc.nextLine();
                                 dataPubblicazione = LocalDate.parse(dataStringa);
                             } catch (DateTimeParseException e) {
-                                System.out.println("FORMATO NON VALIDO, PER FAVORE INSERISCI LA DATA NEL FORMATO CORRETTO (yyyy-mm-dd).");
+                                System.err.println("FORMATO NON VALIDO, PER FAVORE INSERISCI LA DATA NEL FORMATO CORRETTO (yyyy-mm-dd).");
                             }
                         }
                         dataPubblicazione = LocalDate.parse(dataStringa);
@@ -111,7 +113,7 @@ public class GestioneCatalogo {
                                 periodicitàScelta = Periodicità.values()[periodicità];
                                 break;
                             } catch (ArrayIndexOutOfBoundsException e) {
-                                System.out.println("SELEZIONE NON VALIDA; 0 PER PERIODICITà SETTIMANALE, 1 PER MENSILE E 2 PER SEMESTRALE");
+                                System.err.println("SELEZIONE NON VALIDA; 0 PER PERIODICITà SETTIMANALE, 1 PER MENSILE E 2 PER SEMESTRALE");
                             }
                         } while (true);
                         Rivista nuovaRivista = new Rivista(titolo, dataPubblicazione, pagine, periodicitàScelta);
@@ -120,6 +122,9 @@ public class GestioneCatalogo {
                 case 4:
                     cercaConIsbn(sc, catalogo);
                     break;
+
+                case 5:
+                    cercaConAnno(sc, catalogo);
 
                 default:
                     System.out.println("SCELTA NON VALIDA");
@@ -143,7 +148,7 @@ public class GestioneCatalogo {
             catalogo.remove(elementoDatogliere);
             System.out.println(" ELEMENTO CON CODICE ISBN " + x + " RIMOSSO CON SUCCESSO.");
         } else {
-            System.out.println("CODICE ISBN " + x + " NON VALIDO, RIPROVARE: ");
+            System.err.println("CODICE ISBN " + x + " NON VALIDO, RIPROVARE: ");
         }
 
     }
@@ -157,7 +162,28 @@ public class GestioneCatalogo {
         if (elementoTrovato != null) {
             System.out.println("ELEMENTO TROVATO: " + elementoTrovato);
         } else {
-            System.out.println("NESSUN ELEMENTO TROVATO CON L'ISBN SPECIFICATO");
+            System.err.println("NESSUN ELEMENTO TROVATO CON L'ISBN SPECIFICATO");
+        }
+    }
+
+    private static void cercaConAnno(Scanner sc, List<Catalogo> catalogo) {
+        System.out.println("INSERISCI LA DATA DI PUBBLICAZIONE DI ELEMENTO DA CERCARE: ");
+        String dataInput = sc.nextLine();
+
+        LocalDate dataRicerca;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            dataRicerca = LocalDate.parse(dataInput, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("FORMATO DATA NON VALIDO");
+            return;
+        }
+        Catalogo elementoTrovato = catalogo.stream().filter(elem -> elem.annoDiPubblicazione.equals(dataRicerca)).findAny().orElse(null);
+
+        if (elementoTrovato != null) {
+            System.out.println("ELEMENTO TROVATO: " + elementoTrovato);
+        } else {
+            System.err.println("NESSUN ELEMENTO TROVATO CON LA DATA SPECIFICATO");
         }
     }
 }
