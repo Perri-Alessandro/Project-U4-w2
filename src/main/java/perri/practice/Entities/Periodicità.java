@@ -1,7 +1,7 @@
 package perri.practice.Entities;
 
 public enum Periodicità {
-    Settimanale,
-    Mensile,
-    Semestrale
+    SETTIMANALE,
+    MENSILE,
+    SEMESTRALE
 }

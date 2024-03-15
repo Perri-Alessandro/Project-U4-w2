@@ -20,6 +20,12 @@ public class Rivista extends Catalogo {
 
     @Override
     public String toString() {
-        return super.toString() + " Periodicita': " + periodicità;
+        return "Rivista{" +
+                "titolo='" + titolo + '\'' +
+                "codiceIsbn=" + codiceIsbn +
+                ", annoDiPubblicazione=" + annoDiPubblicazione +
+                ", numeroPagine=" + numeroPagine +
+                ", Periodicità=" + periodicità +
+                '}';
     }
 }

@@ -20,7 +20,7 @@ public class Libro extends Catalogo {
     public String getAutore() {
         return autore;
     }
-    
+
     public void setAutore(String autore) {
         this.autore = autore;
     }
@@ -37,6 +37,7 @@ public class Libro extends Catalogo {
     public String toString() {
         return "Libro{" +
                 "titolo='" + titolo + '\'' +
+                "codiceIsbn=" + codiceIsbn +
                 ", annoDiPubblicazione=" + annoDiPubblicazione +
                 ", numeroPagine=" + numeroPagine +
                 ", autore='" + autore + '\'' +

@@ -1,11 +1,10 @@
 package perri.practice.Entities;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 public abstract class Catalogo {
+    protected static int ultimoCodiceIsbn = 10000;
     protected int codiceIsbn;
-
     protected String titolo;
 
     protected LocalDate annoDiPubblicazione;
@@ -13,8 +12,7 @@ public abstract class Catalogo {
     protected int numeroPagine;
 
     public Catalogo(String titolo, LocalDate annoDiPubblicazione, int numeroPagine) {
-        Random idd = new Random();
-        this.codiceIsbn = idd.nextInt(10000, 10010);
+        this.codiceIsbn = ultimoCodiceIsbn++;
         this.titolo = titolo;
         this.annoDiPubblicazione = annoDiPubblicazione;
         this.numeroPagine = numeroPagine;
