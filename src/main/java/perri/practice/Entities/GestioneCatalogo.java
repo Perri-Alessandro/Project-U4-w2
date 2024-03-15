@@ -94,18 +94,31 @@ public class GestioneCatalogo {
                         }
                         dataPubblicazione = LocalDate.parse(dataStringa);
                         int pagine = sc.nextInt();
-                        int periodicita = sc.nextInt();
-                        Rivista nuovaRivista = new Rivista(titolo, dataPubblicazione, pagine, Periodicità.values()[periodicita]);
+                        int periodicità;
+                        Periodicità periodicitàScelta = null;
+                        do {
+                            periodicità = sc.nextInt();
+                            try {
+                                periodicitàScelta = Periodicità.values()[periodicità];
+                                break;
+                            } catch (ArrayIndexOutOfBoundsException e) {
+                                System.out.println("SELEZIONE NON VALIDA; 0 PER PERIODICITà SETTIMANALE, 1 PER MENSILE E 2 PER SEMESTRALE");
+                            }
+                        } while (true);
+                        Rivista nuovaRivista = new Rivista(titolo, dataPubblicazione, pagine, periodicitàScelta);
                         catalogo.add(nuovaRivista);
                     }
 
                     break;
+
                 case 2:
                     rimuoviElemento(sc, catalogo);
                     break;
+
                 case 3:
                     visualizzaCatalogo(catalogo);
                     break;
+
                 default:
                     System.out.println("SCELTA NON VALIDA");
             }
